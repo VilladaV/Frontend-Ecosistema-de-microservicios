@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Control - Persona 3</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .card { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #resultado1, #resultado2 { background: #f4f4f4; padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Sistema Distribuido - Nodo Frontend</h1>
+
+    <div class="card">
+        <h3>Botón 1: Consulta API Externa (Concurrencia)</h3>
+        <p>Consulta datos externos usando Threads (I/O Bound).</p>
+        <button onclick="ejecutarBoton1()">Consultar API</button>
+        <div id="resultado1">Esperando acción...</div>
+    </div>
+
+    <div class="card">
+        <h3>Botón 2: Consulta BD Nube</h3>
+        <p>Obtiene los últimos registros de la base de datos maestra.</p>
+        <button onclick="ejecutarBoton2()">Consultar Nube</button>
+        <div id="resultado2">Esperando acción...</div>
+    </div>
+
+    <script>
+        async function ejecutarBoton1() {
+            document.getElementById('resultado1').innerText = "Procesando...";
+            const response = await fetch('/boton1', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('resultado1').innerText = JSON.stringify(data, null, 2);
+        }
+
+        async function ejecutarBoton2() {
+            document.getElementById('resultado2').innerText = "Conectando a BD...";
+            const response = await fetch('/boton2', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('resultado2').innerText = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
