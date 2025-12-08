@@ -1,19 +1,19 @@
-# Usamos una imagen base ligera (Slim) para cumplir el requisito de optimización
+# Usa una imagen base ligera Slim para cumplir el requisito de optimización
 FROM python:3.9-slim
 
 # Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiamos los requisitos primero para aprovechar la caché de Docker
+# Copia los requisitos primero para aprovechar la caché de Docker
 COPY requirements.txt .
 
-# Instalamos dependencias
+# Instala dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiamos el resto del código
+# Copia el resto del código
 COPY . .
 
-# Exponemos el puerto 5000 (puerto por defecto de Flask)
+# Expone el puerto 5000 puerto por defecto de Flask
 EXPOSE 5000
 
 # Comando para iniciar la aplicación

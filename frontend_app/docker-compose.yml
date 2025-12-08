@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: .
+    container_name: frontend_app
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: 104.197.40.19        # IP del MySQL en la nube
+      DB_USER: app_user             # usuario que muestra el script
+      DB_PASSWORD: AppSecurePassword123!   #
+      DB_NAME: inventario_db        #
+      DB_PORT: 3306
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "2g"

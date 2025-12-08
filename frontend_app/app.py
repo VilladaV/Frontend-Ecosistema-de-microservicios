@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # --- CONFIGURACIÓN DE BASE DE DATOS (Variables de Entorno) ---
-# Esto se tiene que conectar con el contenedor de Alejndra
+# Esto se tiene que conectar con el contenedor
 DB_HOST = os.getenv('DB_HOST', 'localhost')
 DB_USER = os.getenv('DB_USER', 'usuario_seguro')
 DB_PASSWORD = os.getenv('DB_PASSWORD', 'password_segura')
@@ -49,15 +49,17 @@ def boton_1():
 @app.route('/boton2', methods=['POST'])
 def boton_2():
     try:
-        # Conexión a la BD gestionada por Alejandra
+        # Conexión a la BD gestionada
         connection = mysql.connector.connect(
-            host=DB_HOST,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            database=DB_NAME
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME,
+        port=3306
         )
+
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM tabla_ejemplo LIMIT 5") # Ajustar según esquema real
+        cursor.execute("SELECT * FROM productos LIMIT 5") #  según esquema real
         resultados = cursor.fetchall()
         connection.close()
         
